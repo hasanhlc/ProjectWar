@@ -12,6 +12,9 @@ public class TimeChangeManager : MonoBehaviour
     public GameObject PeaceObjects;
     public GameObject VirtualCamera;
     private ColorAdjustments colorAdjustments;
+    private bool CoolDownReady= true;
+    
+    
     private void Awake()
     {
 
@@ -20,7 +23,7 @@ public class TimeChangeManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        TimeChangeWar();
     }
 
     // Update is called once per frame
@@ -43,17 +46,24 @@ public class TimeChangeManager : MonoBehaviour
 
     public void TimeChangeWar()
     {
-        WarObjects.SetActive(true);
-        PeaceObjects.SetActive(false);
-        GlobalVolume.profile.TryGet(out colorAdjustments);
-        colorAdjustments.saturation.value = -100; // Siyah-beyaz yap
+        if (CoolDownReady)
+        {
+            WarObjects.SetActive(true);
+            PeaceObjects.SetActive(false);
+            GlobalVolume.profile.TryGet(out colorAdjustments);
+            colorAdjustments.saturation.value = -100; // Siyah-beyaz yap
+        }
+
     }
 
     public void TimeChangePeace()
     {
-        WarObjects.SetActive(false);
-        PeaceObjects.SetActive(true);
-        GlobalVolume.profile.TryGet(out colorAdjustments);
-        colorAdjustments.saturation.value = 9; // Siyah-beyaz yap
+        if (CoolDownReady)
+        {
+            WarObjects.SetActive(false);
+            PeaceObjects.SetActive(true);
+            GlobalVolume.profile.TryGet(out colorAdjustments);
+            colorAdjustments.saturation.value = 9; // Siyah-beyaz yap
+        }
     }
 }
