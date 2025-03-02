@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 public class TimeChangeManager : MonoBehaviour
 {
-    private bool TimeState = true;
+    private bool TimeState ;
     public Volume GlobalVolume;
     public GameObject WarObjects;
     public GameObject PeaceObjects;
@@ -18,7 +18,10 @@ public class TimeChangeManager : MonoBehaviour
     private ColorAdjustments colorAdjustments;
     public GameObject PeaceImage;
     public GameObject WarImage;
-    
+    private bool coolDownIsReady;
+
+    public Image coolDownFıllImage;
+    public float coolDownTime = 5;
     
     private void Awake()
     {
@@ -36,44 +39,71 @@ public class TimeChangeManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        ChangeTimeAbility();
+    }
+
+    public void ChangeTimeAbility()
+
+    {
+        if (Input.GetKeyDown(KeyCode.R) && coolDownIsReady)
         {
             if (TimeState)
             {
                 TimeChangeWar();
-                TimeState = false;
+
             }
             else
             {
                 TimeChangePeace();
-                TimeState = true;
+
             }
+        }
+
+        if (coolDownIsReady == false)
+        {
+            coolDownFıllImage.fillAmount -= 1 / coolDownTime * Time.deltaTime;
+
+            if (coolDownFıllImage.fillAmount <= 0)
+            {
+                coolDownFıllImage.fillAmount = 0;
+                coolDownIsReady = true;
+            }
+
         }
     }
 
+
     public void TimeChangeWar()
     {
+            print("War");
+            TimeState = false;
             WarObjects.SetActive(true);
             PeaceObjects.SetActive(false);
             GlobalVolume.profile.TryGet(out colorAdjustments);
             colorAdjustments.saturation.value = -100; // Siyah-beyaz yap
-            ChangeSkillIcon(true);
+
+            ChangeSkıllAndCooldown(true);
             
     }
 
     public void TimeChangePeace()
     {
-
+            print("Peace");
+            TimeState = true;
             WarObjects.SetActive(false);
             PeaceObjects.SetActive(true);
             GlobalVolume.profile.TryGet(out colorAdjustments);
             colorAdjustments.saturation.value = 9; 
-            ChangeSkillIcon(false);
+
+            ChangeSkıllAndCooldown(false);
             
     }
 
-    private void ChangeSkillIcon(bool WarState)
+    private void ChangeSkıllAndCooldown(bool WarState)
     {
+        coolDownIsReady = false;
+        coolDownFıllImage.fillAmount = 1;
+
         if (WarState)
         {
             PeaceImage.SetActive(true);

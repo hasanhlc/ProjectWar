@@ -1798,7 +1798,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &719872439
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3919,6 +3919,8 @@ MonoBehaviour:
   VirtualCamera: {fileID: 1854949644}
   PeaceImage: {fileID: 1122726926}
   WarImage: {fileID: 1507934059}
+  "coolDownF\u0131llImage": {fileID: 719872440}
+  coolDownTime: 5
 --- !u!4 &1944769819
 Transform:
   m_ObjectHideFlags: 0
