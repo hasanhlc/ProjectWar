@@ -30,6 +30,8 @@ public class TimeChangeManager : MonoBehaviour
     public Image ProgressBarTime;
     public GameObject TimerProgressBar;
     public float ProgressDuration = 15f;
+
+    private Coroutine WarDurationCoroutine;
     
     private void Awake()
     {
@@ -40,7 +42,7 @@ public class TimeChangeManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        TimeChangeWar();
+        TimeChangePeace();
 
 
     }
@@ -59,7 +61,6 @@ public class TimeChangeManager : MonoBehaviour
             if (TimeState)
             {
                 TimeChangeWar();
-
             }
             else
             {
@@ -85,7 +86,8 @@ public class TimeChangeManager : MonoBehaviour
     public void TimeChangeWar()
     {
             print("War");
-            TimerProgressBar.SetActive(false);
+            TimerProgressBar.SetActive(true);
+            StartRopeTimer();
             TimeState = false;
             WarObjects.SetActive(true);
             PeaceObjects.SetActive(false);
@@ -99,15 +101,17 @@ public class TimeChangeManager : MonoBehaviour
     public void TimeChangePeace()
     {
             print("Peace");
-            TimerProgressBar.SetActive(true);
-            ProgressBarTime.fillAmount = 1f;
-            StartCoroutine(RopeProgressDecrase());
-
+            TimerProgressBar.SetActive(false);
+            if (WarDurationCoroutine != null)
+            {
+                StopCoroutine(WarDurationCoroutine);
+            }
             TimeState = true;
             WarObjects.SetActive(false);
             PeaceObjects.SetActive(true);
             GlobalVolume.profile.TryGet(out colorAdjustments);
             colorAdjustments.saturation.value = 9; 
+
 
             ChangeSkıllAndCooldown(false);
             
@@ -137,7 +141,7 @@ public class TimeChangeManager : MonoBehaviour
     {
         StopAllCoroutines();
         ProgressBarTime.fillAmount = 1f;
-        StartCoroutine(RopeProgressDecrase());
+        WarDurationCoroutine = StartCoroutine(RopeProgressDecrase());
     }
 
     private IEnumerator RopeProgressDecrase()
@@ -145,19 +149,15 @@ public class TimeChangeManager : MonoBehaviour
         float elapsedTime = 0f;
         float startValue = 1f; // Başlangıç değeri (dolu)
         float endValue = 0f;   // Bitiş değeri (boş)
-        Debug.Log("PROGRESS DURATİON :"+ ProgressDuration);
         while (elapsedTime < ProgressDuration)
         {
             elapsedTime += Time.deltaTime;
-            Debug.Log(elapsedTime);
             ProgressBarTime.fillAmount = Mathf.Lerp(startValue, endValue, elapsedTime / ProgressDuration);
             yield return null; // Bir sonraki frame'e geç
         }
 
         ProgressBarTime.fillAmount = 0f; // Son değeri kesin olarak sıfırla
-        Debug.Log("War Çağırılıyor");
-
-        TimeChangeWar();
+        TimeChangePeace();
     }
 
 }
