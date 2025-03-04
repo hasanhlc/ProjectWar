@@ -1,0 +1,54 @@
+{
+    "name": "GeneralGame",
+    "maps": [
+        {
+            "name": "GeneralActions",
+            "id": "3f955539-649a-4e93-8c88-06204128c60d",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "399e5fdc-818c-4582-9b30-9a937b69153d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ChangeTime",
+                    "type": "Button",
+                    "id": "6909d46d-b7c0-4e6f-a46a-309bacd70248",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "456ca76a-acab-4c56-b8a8-5a1787e5a6a9",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5a1ab800-2dde-4054-8ec8-73ead1b81520",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeTime",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

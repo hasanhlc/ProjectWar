@@ -18,6 +18,8 @@ public class TimeChangeManager : MonoBehaviour
     private ColorAdjustments colorAdjustments;
     public GameObject PeaceImage;
     public GameObject WarImage;
+    
+    public GeneralGame playerInputActions;
     private bool coolDownIsReady;
 
     public Image coolDownFıllImage;
@@ -25,7 +27,8 @@ public class TimeChangeManager : MonoBehaviour
     
     private void Awake()
     {
-
+        playerInputActions = new GeneralGame();
+        playerInputActions.GeneralActions.Enable();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -45,7 +48,7 @@ public class TimeChangeManager : MonoBehaviour
     public void ChangeTimeAbility()
 
     {
-        if (Input.GetKeyDown(KeyCode.R) && coolDownIsReady)
+        if (playerInputActions.GeneralActions.ChangeTime.WasPressedThisFrame() && coolDownIsReady)
         {
             if (TimeState)
             {
