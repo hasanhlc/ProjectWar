@@ -6,6 +6,7 @@ public class SkyManager : MonoBehaviour
     public GameObject Moon;
     public GameObject Stars;
     public GameObject rainFX;
+    public GameObject PosProcessVolume;
     public Material CloudMaterial;
     public Material SkyMaterial;
 
@@ -23,6 +24,7 @@ public class SkyManager : MonoBehaviour
             rainFX.SetActive(false);
             CloudMaterial.mainTextureOffset = new Vector2(1f, 0);
             SkyMaterial.mainTextureOffset = new Vector2(1f, 0);
+            RenderSettings.fog = false;
         }
         else
         {
@@ -33,6 +35,7 @@ public class SkyManager : MonoBehaviour
             rainFX.SetActive(true);
             CloudMaterial.mainTextureOffset = new Vector2(1.51f, 0);
             SkyMaterial.mainTextureOffset = new Vector2(1.36f, 0);
+            RenderSettings.fog = true;
         }
 
     }
