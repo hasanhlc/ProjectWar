@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.Mime;
 using System.Threading;
+using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
@@ -20,6 +21,11 @@ public class TimeChangeManager : MonoBehaviour
     private ColorAdjustments colorAdjustments;
     public GameObject PeaceImage;
     public GameObject WarImage;
+
+    public GameObject WarPlayerAsset;
+    public GameObject PeacePlayerAsset;
+
+    public GameObject playerGeometry;
     
     public GeneralGame playerInputActions;
     private bool coolDownIsReady;
@@ -32,9 +38,11 @@ public class TimeChangeManager : MonoBehaviour
     public float ProgressDuration = 15f;
 
     private Coroutine WarDurationCoroutine;
+    private SkyManager skyManager;
     
     private void Awake()
     {
+        skyManager = GetComponent<SkyManager>();
         playerInputActions = new GeneralGame();
         playerInputActions.GeneralActions.Enable();
     }
@@ -92,7 +100,9 @@ public class TimeChangeManager : MonoBehaviour
             WarObjects.SetActive(true);
             PeaceObjects.SetActive(false);
             GlobalVolume.profile.TryGet(out colorAdjustments);
-            colorAdjustments.saturation.value = -100; // Siyah-beyaz yap
+            //colorAdjustments.saturation.value = -100; // Siyah-beyaz yap
+            skyManager.ChangeSky(TimeState);
+
             Debug.Log("War Çağırıldı");
             ChangeSkıllAndCooldown(true);
             
@@ -110,12 +120,14 @@ public class TimeChangeManager : MonoBehaviour
             WarObjects.SetActive(false);
             PeaceObjects.SetActive(true);
             GlobalVolume.profile.TryGet(out colorAdjustments);
-            colorAdjustments.saturation.value = 9; 
-
+            //colorAdjustments.saturation.value = 9; 
+            skyManager.ChangeSky(TimeState);
+            Debug.Log("Peace Çağırıldı");
 
             ChangeSkıllAndCooldown(false);
             
     }
+
 
     private void ChangeSkıllAndCooldown(bool WarState)
 
@@ -160,4 +172,27 @@ public class TimeChangeManager : MonoBehaviour
         TimeChangePeace();
     }
 
+
+    private void ChangePlayerAsset()
+    {
+        foreach (Transform child in playerGeometry.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+
+        if (TimeState)
+        {
+            GameObject childassetprefab = Instantiate(PeacePlayerAsset, playerGeometry.transform);
+            childassetprefab.SetActive(true);
+
+        }
+        else
+        {
+            GameObject childassetprefab = Instantiate(WarPlayerAsset, playerGeometry.transform);
+            childassetprefab.SetActive(true);
+        }
+    }
+
 }
+
