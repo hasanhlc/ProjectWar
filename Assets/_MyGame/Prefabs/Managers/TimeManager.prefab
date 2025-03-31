@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &9105191742995028519
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1638333341223669756}
+  - component: {fileID: 4940050920873768055}
+  - component: {fileID: 7309437434922687203}
+  m_Layer: 0
+  m_Name: TimeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1638333341223669756
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9105191742995028519}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4940050920873768055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9105191742995028519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e82e85553426c224b92d67294e64aea0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalVolume: {fileID: 0}
+  WarObjects: {fileID: 0}
+  PeaceObjects: {fileID: 0}
+  VirtualCamera: {fileID: 0}
+  PeaceImage: {fileID: 0}
+  WarImage: {fileID: 0}
+  WarPlayerAsset: {fileID: 0}
+  PeacePlayerAsset: {fileID: 0}
+  playerGeometry: {fileID: 0}
+  "coolDownF\u0131llImage": {fileID: 0}
+  coolDownTime: 5
+  ProgressBarTime: {fileID: 0}
+  TimerProgressBar: {fileID: 0}
+  ProgressDuration: 15
+--- !u!114 &7309437434922687203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9105191742995028519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc1c36c58d80478428f597ff9317f7ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sun: {fileID: 0}
+  Moon: {fileID: 0}
+  Stars: {fileID: 0}
+  rainFX: {fileID: 0}
+  PosProcessVolume: {fileID: 0}
+  CloudMaterial: {fileID: 2100000, guid: b7f2aefb07017f44fb50403a8f68cc51, type: 2}
+  SkyMaterial: {fileID: 2100000, guid: e68f77e240a7f8643b5cc4253dc37516, type: 2}
