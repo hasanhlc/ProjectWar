@@ -48,6 +48,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "UIIngame",
+            "id": "6f37205e-061c-4179-8289-73d59101d83f",
+            "actions": [
+                {
+                    "name": "OpenUIIngame",
+                    "type": "Button",
+                    "id": "df2eb058-90fb-4829-b9c6-e70663bc27ee",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5a1c7238-fd62-45de-bf4d-930d7062020e",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenUIIngame",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
