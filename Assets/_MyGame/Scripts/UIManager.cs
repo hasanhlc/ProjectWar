@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,13 +8,19 @@ public class UIManager : MonoBehaviour
     public GameObject levelSelectionUI;
     public GameObject settingsUI;
     public GameObject creditsUI;
+    public GameObject introLevelOneUI;
+    public RectTransform textTransform;
+    private float scrollSpeed = 100f;
+    public float endY = 1700f; // Distance to scroll the text
+    // starty = -1000f; // Starting position of the text
 
     public enum MenuState
     {
         MainMenu,
         LevelSelection,
         Settings,
-        Credits
+        Credits,
+        IntroLevel
     }
 
     private MenuState currentState;
@@ -34,6 +41,33 @@ public class UIManager : MonoBehaviour
             Debug.Log("Escape key pressed.");
         }
     } 
+
+
+    public void IntroLevelOne()
+    {
+        CloseAllMenus();
+        introLevelOneUI.SetActive(true);
+        currentState = MenuState.IntroLevel;
+        textTransform.anchoredPosition = new Vector2(0,-1000f); // Starting position of the text
+        StartCoroutine(ScrollUp());
+    }
+
+    IEnumerator ScrollUp()
+    {
+         while (textTransform.anchoredPosition.y < endY)
+        {
+            Vector2 pos = textTransform.anchoredPosition;
+            pos.y += scrollSpeed * Time.deltaTime;
+            textTransform.anchoredPosition = pos;
+
+            yield return null; // Bir frame bekle
+        }
+        // Scroll işlemi tamamlandığında yapılacak işlemler
+        // burada fade out eklenecek
+        LoadScene("SampleScene");
+    }
+
+
 
     public void LoadScene(string sceneName)
     {
@@ -76,6 +110,7 @@ public class UIManager : MonoBehaviour
         levelSelectionUI.SetActive(false);
         settingsUI.SetActive(false);
         creditsUI.SetActive(false);
+        introLevelOneUI.SetActive(false);
     }
 
     private void pressBack()
