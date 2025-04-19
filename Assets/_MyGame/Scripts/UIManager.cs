@@ -83,7 +83,6 @@ public class UIManager : MonoBehaviour
     public void OpenLevelSelection()
     {
         CloseAllMenus();
-        mainMenuUI.SetActive(false);
         levelSelectionUI.SetActive(true);
         currentState = MenuState.LevelSelection;
     }
@@ -91,7 +90,6 @@ public class UIManager : MonoBehaviour
     public void OpenSettings()
     {
         CloseAllMenus();
-        mainMenuUI.SetActive(false);
         settingsUI.SetActive(true);
         currentState = MenuState.Settings;
     }
@@ -99,7 +97,6 @@ public class UIManager : MonoBehaviour
     public void OpenCredits()
     {
         CloseAllMenus();
-        mainMenuUI.SetActive(false);
         creditsUI.SetActive(true);
         currentState = MenuState.Credits;
     }
