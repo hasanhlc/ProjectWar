@@ -13,7 +13,7 @@ using UnityEngine.UI;
 
 public class TimeChangeManager : MonoBehaviour
 {
-    private bool TimeState ;
+    private bool TimeState;
     public Volume GlobalVolume;
     public GameObject WarObjects;
     public GameObject PeaceObjects;
@@ -26,7 +26,7 @@ public class TimeChangeManager : MonoBehaviour
     public GameObject PeacePlayerAsset;
 
     public GameObject playerGeometry;
-    
+
     public GeneralGame playerInputActions;
     private bool coolDownIsReady;
 
@@ -39,7 +39,10 @@ public class TimeChangeManager : MonoBehaviour
 
     private Coroutine WarDurationCoroutine;
     private SkyManager skyManager;
-    
+
+    private float fadeInFadeOutDuration = 1f; // Fade süresi (saniye cinsinden)
+    public Image fadeInFadeOutImage; // Fade işlemi için kullanılacak UI Image bileşeni
+
     private void Awake()
     {
         skyManager = GetComponent<SkyManager>();
@@ -51,8 +54,6 @@ public class TimeChangeManager : MonoBehaviour
     void Start()
     {
         TimeChangePeace();
-
-
     }
 
     // Update is called once per frame
@@ -61,20 +62,13 @@ public class TimeChangeManager : MonoBehaviour
         ChangeTimeAbility();
     }
 
+
     public void ChangeTimeAbility()
 
     {
         if (playerInputActions.GeneralActions.ChangeTime.WasPressedThisFrame() && coolDownIsReady)
         {
-            if (TimeState)
-            {
-                TimeChangeWar();
-            }
-            else
-            {
-                TimeChangePeace();
-
-            }
+            StartCoroutine(MySequence());
         }
 
         if (coolDownIsReady == false)
@@ -90,42 +84,115 @@ public class TimeChangeManager : MonoBehaviour
         }
     }
 
+    IEnumerator MySequence()
+    {
+        // Fade In yap
+        yield return StartCoroutine(FadeIn(fadeInFadeOutDuration));
+
+        // Bekleme veya UI işlemleri
+        yield return new WaitForSeconds(1f);
+        ChangeTimeAfterFadeIn();
+
+
+        // Fade Out yap
+        yield return StartCoroutine(FadeOut(fadeInFadeOutDuration));
+
+        // Fade out sonrası işler
+        Debug.Log("Tamamlandı.");
+    }
+
+
+
+
+    private void ChangeTimeAfterFadeIn()
+    {
+        // zaman değiştirme işlemi
+        Debug.Log("zaman değişiyor");
+        if (TimeState)
+        {
+            TimeChangeWar();
+        }
+        else
+        {
+            TimeChangePeace();
+
+        }
+    }
+
+    public IEnumerator FadeIn(float duration)
+    {
+        float t = 0f;
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+            SetImageAlpha(t / duration);
+            yield return null;
+        }
+        SetImageAlpha(1f);
+    }
+
+    public IEnumerator FadeOut(float duration)
+    {
+        float t = 0f;
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+            SetImageAlpha(1f - (t / duration));
+            yield return null;
+        }
+        SetImageAlpha(0f);
+    }
+
+
+
+
+
+
+
+
+    void SetImageAlpha(float alpha)
+    {
+        Color color = fadeInFadeOutImage.color;
+        color.a = Mathf.Clamp01(alpha);
+        fadeInFadeOutImage.color = color;
+    }
+
 
     public void TimeChangeWar()
     {
-            print("War");
-            TimerProgressBar.SetActive(true);
-            StartRopeTimer();
-            TimeState = false;
-            WarObjects.SetActive(true);
-            PeaceObjects.SetActive(false);
-            GlobalVolume.profile.TryGet(out colorAdjustments);
-            //colorAdjustments.saturation.value = -100; // Siyah-beyaz yap
-            skyManager.ChangeSky(TimeState);
+        print("War");
+        TimerProgressBar.SetActive(true);
+        StartRopeTimer();
+        TimeState = false;
+        WarObjects.SetActive(true);
+        PeaceObjects.SetActive(false);
+        GlobalVolume.profile.TryGet(out colorAdjustments);
+        //colorAdjustments.saturation.value = -100; // Siyah-beyaz yap
+        skyManager.ChangeSky(TimeState);
 
-            Debug.Log("War Çağırıldı");
-            ChangeSkıllAndCooldown(true);
-            
+        Debug.Log("War Çağırıldı");
+        ChangeSkıllAndCooldown(true);
+
     }
 
     public void TimeChangePeace()
     {
-            print("Peace");
-            TimerProgressBar.SetActive(false);
-            if (WarDurationCoroutine != null)
-            {
-                StopCoroutine(WarDurationCoroutine);
-            }
-            TimeState = true;
-            WarObjects.SetActive(false);
-            PeaceObjects.SetActive(true);
-            GlobalVolume.profile.TryGet(out colorAdjustments);
-            //colorAdjustments.saturation.value = 9; 
-            skyManager.ChangeSky(TimeState);
-            Debug.Log("Peace Çağırıldı");
+        print("Peace");
+        TimerProgressBar.SetActive(false);
+        if (WarDurationCoroutine != null)
+        {
+            StopCoroutine(WarDurationCoroutine);
+        }
+        TimeState = true;
+        WarObjects.SetActive(false);
+        PeaceObjects.SetActive(true);
+        GlobalVolume.profile.TryGet(out colorAdjustments);
+        //colorAdjustments.saturation.value = 9; 
+        skyManager.ChangeSky(TimeState);
+        Debug.Log("Peace Çağırıldı");
 
-            ChangeSkıllAndCooldown(false);
-            
+        ChangeSkıllAndCooldown(false);
+
     }
 
 
@@ -169,7 +236,8 @@ public class TimeChangeManager : MonoBehaviour
         }
 
         ProgressBarTime.fillAmount = 0f; // Son değeri kesin olarak sıfırla
-        TimeChangePeace();
+        StartCoroutine(MySequence());
+        Debug.Log("Zaman değişti, bar sıfırlandı.");
     }
 
 
