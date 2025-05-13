@@ -61,6 +61,7 @@ public class TimeChangeManager : MonoBehaviour
     {
         TimeChangePeace();
         ChangePlayerAsset();
+
     }
 
     // Update is called once per frame

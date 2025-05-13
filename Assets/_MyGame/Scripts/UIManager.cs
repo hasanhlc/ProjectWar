@@ -10,9 +10,15 @@ public class UIManager : MonoBehaviour
     public GameObject creditsUI;
     public GameObject introLevelOneUI;
     public RectTransform textTransform;
+    public RectTransform textTransformCredits;
     private float scrollSpeed = 100f;
     public float endY = 1700f; // Distance to scroll the text
     // starty = -1000f; // Starting position of the text
+    private float scrollSpeedCredits = 150f;
+    public float endYCredits = 1700f;
+
+    public Coroutine creditsCoroutine ;
+    public Coroutine IntroCoroutine ;
 
     public enum MenuState
     {
@@ -40,6 +46,12 @@ public class UIManager : MonoBehaviour
             pressBack();
             Debug.Log("Escape key pressed.");
         }
+        if (Input.GetKeyDown(KeyCode.E) && currentState == MenuState.IntroLevel)
+        {
+            Debug.Log("E ye Basıldı");
+            StopCoroutine(IntroCoroutine);
+            LoadScene("SampleScene");
+        }
     } 
 
 
@@ -49,7 +61,7 @@ public class UIManager : MonoBehaviour
         introLevelOneUI.SetActive(true);
         currentState = MenuState.IntroLevel;
         textTransform.anchoredPosition = new Vector2(0,-1000f); // Starting position of the text
-        StartCoroutine(ScrollUp());
+        IntroCoroutine = StartCoroutine(ScrollUp());
     }
 
     IEnumerator ScrollUp()
@@ -65,6 +77,19 @@ public class UIManager : MonoBehaviour
         // Scroll işlemi tamamlandığında yapılacak işlemler
         // burada fade out eklenecek
         LoadScene("SampleScene");
+    }
+        IEnumerator ScrollUpCredits()
+    {
+         while (textTransformCredits.anchoredPosition.y < endYCredits)
+        {
+            Vector2 pos = textTransformCredits.anchoredPosition;
+            pos.y += scrollSpeedCredits * Time.deltaTime;
+            textTransformCredits.anchoredPosition = pos;
+
+            yield return null; // Bir frame bekle
+        }
+        OpenMainMenu();
+
     }
 
 
@@ -87,6 +112,13 @@ public class UIManager : MonoBehaviour
         currentState = MenuState.LevelSelection;
     }
 
+    public void OpenMainMenu()
+    {
+        CloseAllMenus();
+        currentState = MenuState.MainMenu;
+        mainMenuUI.SetActive(true);
+    }
+
     public void OpenSettings()
     {
         CloseAllMenus();
@@ -99,6 +131,8 @@ public class UIManager : MonoBehaviour
         CloseAllMenus();
         creditsUI.SetActive(true);
         currentState = MenuState.Credits;
+        textTransformCredits.anchoredPosition = new Vector2(0,-1350f); // Starting position of the text
+        creditsCoroutine = StartCoroutine(ScrollUpCredits());
     }
 
     public void CloseAllMenus()
@@ -131,6 +165,7 @@ public class UIManager : MonoBehaviour
             creditsUI.SetActive(false);
             mainMenuUI.SetActive(true);
             currentState = MenuState.MainMenu;
+            StopCoroutine(creditsCoroutine);
             break;
         }
     }
