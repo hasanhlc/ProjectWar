@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Net.Mime;
 using System.Threading;
 using System.Xml.Serialization;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
@@ -23,11 +24,14 @@ public class TimeChangeManager : MonoBehaviour
     public GameObject WarImage;
 
     public GameObject WarPlayerAsset;
+    public GameObject WarCameraRoot;
     public GameObject PeacePlayerAsset;
+    public GameObject PeaceCameraRoot;
 
     public GameObject playerGeometry;
 
     public GeneralGame playerInputActions;
+    private PlayerInput playerInput ;
     private bool coolDownIsReady;
 
     public Image coolDownFıllImage;
@@ -43,6 +47,8 @@ public class TimeChangeManager : MonoBehaviour
     private float fadeInFadeOutDuration = 1f; // Fade süresi (saniye cinsinden)
     public Image fadeInFadeOutImage; // Fade işlemi için kullanılacak UI Image bileşeni
 
+
+
     private void Awake()
     {
         skyManager = GetComponent<SkyManager>();
@@ -54,6 +60,7 @@ public class TimeChangeManager : MonoBehaviour
     void Start()
     {
         TimeChangePeace();
+        ChangePlayerAsset();
     }
 
     // Update is called once per frame
@@ -64,7 +71,6 @@ public class TimeChangeManager : MonoBehaviour
 
 
     public void ChangeTimeAbility()
-
     {
         if (playerInputActions.GeneralActions.ChangeTime.WasPressedThisFrame() && coolDownIsReady)
         {
@@ -141,6 +147,7 @@ public class TimeChangeManager : MonoBehaviour
             yield return null;
         }
         SetImageAlpha(0f);
+
     }
 
 
@@ -172,6 +179,7 @@ public class TimeChangeManager : MonoBehaviour
 
         Debug.Log("War Çağırıldı");
         ChangeSkıllAndCooldown(true);
+        ChangePlayerAsset();
 
     }
 
@@ -192,6 +200,7 @@ public class TimeChangeManager : MonoBehaviour
         Debug.Log("Peace Çağırıldı");
 
         ChangeSkıllAndCooldown(false);
+        ChangePlayerAsset();
 
     }
 
@@ -243,22 +252,29 @@ public class TimeChangeManager : MonoBehaviour
 
     private void ChangePlayerAsset()
     {
-        foreach (Transform child in playerGeometry.transform)
+
+        if (TimeState) //Peace
         {
-            Destroy(child.gameObject);
+            PeacePlayerAsset.SetActive(true);
+            WarPlayerAsset.SetActive(false);
+            VirtualCamera.GetComponent<CinemachineVirtualCamera>().Follow = PeaceCameraRoot.transform;
+            PeacePlayerAsset.transform.position = WarPlayerAsset.transform.position;
+            PeacePlayerAsset.GetComponent<PlayerInput>().enabled = false;
+            PeacePlayerAsset.GetComponent<PlayerInput>().enabled = true;
+
+
+
         }
-
-
-        if (TimeState)
+        else //War
         {
-            GameObject childassetprefab = Instantiate(PeacePlayerAsset, playerGeometry.transform);
-            childassetprefab.SetActive(true);
+            PeacePlayerAsset.SetActive(false);
+            WarPlayerAsset.SetActive(true);
+            VirtualCamera.GetComponent<CinemachineVirtualCamera>().Follow = WarCameraRoot.transform;
+            WarPlayerAsset.transform.position = PeacePlayerAsset.transform.position;
+            WarPlayerAsset.GetComponent<PlayerInput>().enabled = false;
+            WarPlayerAsset.GetComponent<PlayerInput>().enabled = true;
 
-        }
-        else
-        {
-            GameObject childassetprefab = Instantiate(WarPlayerAsset, playerGeometry.transform);
-            childassetprefab.SetActive(true);
+
         }
     }
 

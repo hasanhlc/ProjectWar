@@ -14530,6 +14530,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5.0000057, y: 0.29999137, z: 5}
   m_Center: {x: -2.500001, y: -0.080299154, z: -2.5}
+--- !u!1 &460336409 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2095749878323139494, guid: 4ee483e8806dc484d806b003d6757feb, type: 3}
+  m_PrefabInstance: {fileID: 4557810056608402077}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &462973933
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52384,6 +52389,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 494282840}
   m_SourcePrefab: {fileID: 100100000, guid: 95640d38768b9f44bbf39ed3421ec759, type: 3}
+--- !u!1 &1637914762 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3502725911660115140, guid: 4ee483e8806dc484d806b003d6757feb, type: 3}
+  m_PrefabInstance: {fileID: 4557810056608402077}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1638347186
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53172,6 +53182,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1900631299}
   m_SourcePrefab: {fileID: 100100000, guid: cc10ce20cd2faea4ca8cb6505e5861d5, type: 3}
+--- !u!1 &1653405916 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4560468973319702047, guid: 4ee483e8806dc484d806b003d6757feb, type: 3}
+  m_PrefabInstance: {fileID: 4557810056608402077}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1654646534
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -69940,13 +69955,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 783787105593514079, guid: 4ee483e8806dc484d806b003d6757feb, type: 3}
-      propertyPath: cursorLocked
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1743323394081551197, guid: 4ee483e8806dc484d806b003d6757feb, type: 3}
       propertyPath: m_Name
       value: FollowingPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 2095749878323139494, guid: 4ee483e8806dc484d806b003d6757feb, type: 3}
+      propertyPath: m_Name
+      value: PlayerCameraRootWar
+      objectReference: {fileID: 0}
+    - target: {fileID: 3502725911660115140, guid: 4ee483e8806dc484d806b003d6757feb, type: 3}
+      propertyPath: m_Name
+      value: PlayerCameraRootPeace
       objectReference: {fileID: 0}
     - target: {fileID: 5431408285981575900, guid: 4ee483e8806dc484d806b003d6757feb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -70189,13 +70208,29 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2070925441631331822}
     - target: {fileID: 4940050920873768055, guid: 104689de53ceeda43887d1b401ae7c56, type: 3}
+      propertyPath: WarCameraRoot
+      value: 
+      objectReference: {fileID: 460336409}
+    - target: {fileID: 4940050920873768055, guid: 104689de53ceeda43887d1b401ae7c56, type: 3}
+      propertyPath: WarPlayerAsset
+      value: 
+      objectReference: {fileID: 1653405916}
+    - target: {fileID: 4940050920873768055, guid: 104689de53ceeda43887d1b401ae7c56, type: 3}
       propertyPath: playerGeometry
       value: 
       objectReference: {fileID: 3837663348645534440}
     - target: {fileID: 4940050920873768055, guid: 104689de53ceeda43887d1b401ae7c56, type: 3}
+      propertyPath: PeaceCameraRoot
+      value: 
+      objectReference: {fileID: 1637914762}
+    - target: {fileID: 4940050920873768055, guid: 104689de53ceeda43887d1b401ae7c56, type: 3}
       propertyPath: ProgressBarTime
       value: 
       objectReference: {fileID: 446216587}
+    - target: {fileID: 4940050920873768055, guid: 104689de53ceeda43887d1b401ae7c56, type: 3}
+      propertyPath: PeacePlayerAsset
+      value: 
+      objectReference: {fileID: 64582561}
     - target: {fileID: 4940050920873768055, guid: 104689de53ceeda43887d1b401ae7c56, type: 3}
       propertyPath: TimerProgressBar
       value: 
