@@ -36,6 +36,8 @@ public class UIManager : MonoBehaviour
     {
         currentState = MenuState.MainMenu;
         mainMenuUI.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     void Update()
