@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class IngameUi : MonoBehaviour
 {
 
-    GeneralGame ınputActions;
+    GeneralGame inputActions;
 
     private PlayerInput playerInput;
     private bool isPaused = false;
@@ -21,8 +21,8 @@ public class IngameUi : MonoBehaviour
     void Awake()
     {
         IngameUI.SetActive(false);
-        ınputActions = new GeneralGame();
-        ınputActions.UIIngame.Enable();
+        inputActions = new GeneralGame();
+        inputActions.UIIngame.Enable();
     }
 
     void Start()
@@ -32,7 +32,7 @@ public class IngameUi : MonoBehaviour
     }
     void Update()
     {
-        if (ınputActions.UIIngame.OpenUIIngame.WasPressedThisFrame())
+        if (inputActions.UIIngame.OpenUIIngame.WasPressedThisFrame())
         {
             if (IngameUI.activeSelf == false)
             {
@@ -96,4 +96,8 @@ public class IngameUi : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
+    void OnDestroy()
+    {
+        inputActions.UIIngame.Disable();
+    }
 }

@@ -81829,6 +81829,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 690564723}
     m_Modifications:
+    - target: {fileID: 110007087564473319, guid: f19e0fee29c40904bb44d416f3310b35, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 110007087564473319, guid: f19e0fee29c40904bb44d416f3310b35, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 110007087564473319, guid: f19e0fee29c40904bb44d416f3310b35, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -654
+      objectReference: {fileID: 0}
+    - target: {fileID: 110007087564473319, guid: f19e0fee29c40904bb44d416f3310b35, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 53
+      objectReference: {fileID: 0}
     - target: {fileID: 1749018377639497385, guid: f19e0fee29c40904bb44d416f3310b35, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -81909,16 +81925,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2318446068878556708, guid: f19e0fee29c40904bb44d416f3310b35, type: 3}
+      propertyPath: m_Name
+      value: ProgressArrow
+      objectReference: {fileID: 0}
     - target: {fileID: 5258844078498002654, guid: f19e0fee29c40904bb44d416f3310b35, type: 3}
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5716862414871597925, guid: f19e0fee29c40904bb44d416f3310b35, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 22aaa75bdbad2bc4595800da7a67687a, type: 3}
     - target: {fileID: 6139008132984946265, guid: f19e0fee29c40904bb44d416f3310b35, type: 3}
       propertyPath: m_Name
       value: MainHud
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5029140637772405637, guid: f19e0fee29c40904bb44d416f3310b35, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f19e0fee29c40904bb44d416f3310b35, type: 3}
@@ -82229,6 +82254,10 @@ PrefabInstance:
       propertyPath: TimerProgressBar
       value: 
       objectReference: {fileID: 1289227902}
+    - target: {fileID: 4940050920873768055, guid: 104689de53ceeda43887d1b401ae7c56, type: 3}
+      propertyPath: warProgressImage
+      value: 
+      objectReference: {fileID: 446216587}
     - target: {fileID: 4940050920873768055, guid: 104689de53ceeda43887d1b401ae7c56, type: 3}
       propertyPath: "coolDownF\u0131llImage"
       value: 

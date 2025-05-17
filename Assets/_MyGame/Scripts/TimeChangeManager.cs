@@ -31,15 +31,15 @@ public class TimeChangeManager : MonoBehaviour
     public GameObject playerGeometry;
 
     public GeneralGame playerInputActions;
-    private PlayerInput playerInput ;
+    private PlayerInput playerInput;
     private bool coolDownIsReady;
 
     public Image coolDownFıllImage;
     public float coolDownTime = 5;
 
-    public Image ProgressBarTime;
+    public Image warProgressImage;
     public GameObject TimerProgressBar;
-    public float ProgressDuration = 15f;
+    public float rotationDuration = 15f;
 
     private Coroutine WarDurationCoroutine;
     private SkyManager skyManager;
@@ -229,23 +229,24 @@ public class TimeChangeManager : MonoBehaviour
     private void StartRopeTimer()
     {
         StopAllCoroutines();
-        ProgressBarTime.fillAmount = 1f;
+        warProgressImage.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         WarDurationCoroutine = StartCoroutine(RopeProgressDecrase());
     }
 
     private IEnumerator RopeProgressDecrase()
     {
         float elapsedTime = 0f;
-        float startValue = 1f; // Başlangıç değeri (dolu)
-        float endValue = 0f;   // Bitiş değeri (boş)
-        while (elapsedTime < ProgressDuration)
+        float startRotationZ = 0f;
+        float endRotationZ = 180f;
+        while (elapsedTime < rotationDuration)
         {
             elapsedTime += Time.deltaTime;
-            ProgressBarTime.fillAmount = Mathf.Lerp(startValue, endValue, elapsedTime / ProgressDuration);
-            yield return null; // Bir sonraki frame'e geç
+            float currentZ = Mathf.Lerp(startRotationZ, endRotationZ, elapsedTime / rotationDuration);
+            warProgressImage.transform.rotation = Quaternion.Euler(0f, 0f, currentZ);
+            yield return null;
         }
 
-        ProgressBarTime.fillAmount = 0f; // Son değeri kesin olarak sıfırla
+        warProgressImage.transform.rotation = Quaternion.Euler(0f, 0f, endRotationZ);
         StartCoroutine(MySequence());
         Debug.Log("Zaman değişti, bar sıfırlandı.");
     }
@@ -277,6 +278,11 @@ public class TimeChangeManager : MonoBehaviour
 
 
         }
+    }
+
+    void OnDestroy()
+    {
+        playerInputActions.GeneralActions.Disable();
     }
 
 }
