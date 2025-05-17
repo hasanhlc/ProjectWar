@@ -648,7 +648,7 @@ GameObject:
   - component: {fileID: 306378932}
   - component: {fileID: 306378931}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -686,7 +686,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19339621, g: 0.89338773, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1030,6 +1030,18 @@ MonoBehaviour:
   textTransformCredits: {fileID: 359291505}
   endY: 1700
   endYCredits: 2030
+  MainMenuBackground: {fileID: 556480934}
+  CreditsBackground: {fileID: 1968229651}
+  LevelSelectBackground: {fileID: 871588150}
+  SettingsBackground: {fileID: 306378929}
+  MainMenuWar: {fileID: 21300000, guid: 8b382b7a27d7b8d47bafc73344db321c, type: 3}
+  MainMenuPeace: {fileID: 21300000, guid: 47f133927d4037c47901491f59a5bfe7, type: 3}
+  CreditsWar: {fileID: 21300000, guid: 8b382b7a27d7b8d47bafc73344db321c, type: 3}
+  CreditsPeace: {fileID: 21300000, guid: 47f133927d4037c47901491f59a5bfe7, type: 3}
+  LevelSelectWar: {fileID: 21300000, guid: 8b382b7a27d7b8d47bafc73344db321c, type: 3}
+  LevelSelectPeace: {fileID: 21300000, guid: 47f133927d4037c47901491f59a5bfe7, type: 3}
+  SettingsWar: {fileID: 21300000, guid: 8b382b7a27d7b8d47bafc73344db321c, type: 3}
+  SettingsPeace: {fileID: 21300000, guid: 47f133927d4037c47901491f59a5bfe7, type: 3}
 --- !u!4 &518116423
 Transform:
   m_ObjectHideFlags: 0
@@ -1095,7 +1107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6415094, g: 0.6415094, b: 0.6415094, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1367,7 +1379,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.56800073, b: 0.514151, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3261,7 +3273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.08926664, g: 0.3207547, b: 0.10694975, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

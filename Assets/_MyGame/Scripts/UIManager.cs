@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -17,8 +18,29 @@ public class UIManager : MonoBehaviour
     private float scrollSpeedCredits = 150f;
     public float endYCredits = 1700f;
 
-    public Coroutine creditsCoroutine ;
-    public Coroutine IntroCoroutine ;
+    public Coroutine creditsCoroutine;
+    public Coroutine IntroCoroutine;
+
+    [Header("Ekranlar")]
+    public GameObject MainMenuBackground;
+    public GameObject CreditsBackground;
+    public GameObject LevelSelectBackground;
+    public GameObject SettingsBackground;
+
+    [Header("Ekran Görselleri")]
+
+    public Sprite MainMenuWar;
+    public Sprite MainMenuPeace;
+    public Sprite CreditsWar;
+    public Sprite CreditsPeace;
+    public Sprite LevelSelectWar;
+    public Sprite LevelSelectPeace;
+    public Sprite SettingsWar;
+    public Sprite SettingsPeace;
+
+
+
+    private bool isWar;
 
     public enum MenuState
     {
@@ -32,12 +54,24 @@ public class UIManager : MonoBehaviour
     private MenuState currentState;
 
 
+    void Awake()
+    {
+        if (Random.value < 0.5f)
+        {
+            isWar = true;
+        }
+        else
+        {
+            isWar = false;
+        }
+    }
     private void Start()
     {
-        currentState = MenuState.MainMenu;
-        mainMenuUI.SetActive(true);
+        OpenMainMenu();
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+
     }
 
     void Update()
@@ -54,7 +88,7 @@ public class UIManager : MonoBehaviour
             StopCoroutine(IntroCoroutine);
             LoadScene("SampleScene");
         }
-    } 
+    }
 
 
     public void IntroLevelOne()
@@ -62,13 +96,13 @@ public class UIManager : MonoBehaviour
         CloseAllMenus();
         introLevelOneUI.SetActive(true);
         currentState = MenuState.IntroLevel;
-        textTransform.anchoredPosition = new Vector2(0,-1000f); // Starting position of the text
+        textTransform.anchoredPosition = new Vector2(0, -1000f); // Starting position of the text
         IntroCoroutine = StartCoroutine(ScrollUp());
     }
 
     IEnumerator ScrollUp()
     {
-         while (textTransform.anchoredPosition.y < endY)
+        while (textTransform.anchoredPosition.y < endY)
         {
             Vector2 pos = textTransform.anchoredPosition;
             pos.y += scrollSpeed * Time.deltaTime;
@@ -80,9 +114,9 @@ public class UIManager : MonoBehaviour
         // burada fade out eklenecek
         LoadScene("SampleScene");
     }
-        IEnumerator ScrollUpCredits()
+    IEnumerator ScrollUpCredits()
     {
-         while (textTransformCredits.anchoredPosition.y < endYCredits)
+        while (textTransformCredits.anchoredPosition.y < endYCredits)
         {
             Vector2 pos = textTransformCredits.anchoredPosition;
             pos.y += scrollSpeedCredits * Time.deltaTime;
@@ -112,6 +146,16 @@ public class UIManager : MonoBehaviour
         CloseAllMenus();
         levelSelectionUI.SetActive(true);
         currentState = MenuState.LevelSelection;
+
+        if (isWar)
+        {
+            LevelSelectBackground.GetComponent<Image>().sprite = LevelSelectWar;
+        }
+        else
+        {
+            LevelSelectBackground.GetComponent<Image>().sprite = LevelSelectPeace;
+        }
+
     }
 
     public void OpenMainMenu()
@@ -119,6 +163,15 @@ public class UIManager : MonoBehaviour
         CloseAllMenus();
         currentState = MenuState.MainMenu;
         mainMenuUI.SetActive(true);
+
+        if (isWar)
+        {
+            MainMenuBackground.GetComponent<Image>().sprite = MainMenuWar;
+        }
+        else
+        {
+            MainMenuBackground.GetComponent<Image>().sprite = MainMenuPeace;
+        }
     }
 
     public void OpenSettings()
@@ -126,6 +179,14 @@ public class UIManager : MonoBehaviour
         CloseAllMenus();
         settingsUI.SetActive(true);
         currentState = MenuState.Settings;
+        if (isWar)
+        {
+            SettingsBackground.GetComponent<Image>().sprite = SettingsWar;
+        }
+        else
+        {
+            SettingsBackground.GetComponent<Image>().sprite = SettingsPeace;
+        }
     }
 
     public void OpenCredits()
@@ -133,8 +194,16 @@ public class UIManager : MonoBehaviour
         CloseAllMenus();
         creditsUI.SetActive(true);
         currentState = MenuState.Credits;
-        textTransformCredits.anchoredPosition = new Vector2(0,-1350f); // Starting position of the text
+        textTransformCredits.anchoredPosition = new Vector2(0, -1350f); // Starting position of the text
         creditsCoroutine = StartCoroutine(ScrollUpCredits());
+        if (isWar)
+        {
+            CreditsBackground.GetComponent<Image>().sprite = CreditsWar;
+        }
+        else
+        {
+            CreditsBackground.GetComponent<Image>().sprite = CreditsPeace;
+        }
     }
 
     public void CloseAllMenus()
@@ -150,25 +219,25 @@ public class UIManager : MonoBehaviour
     {
         switch (currentState)
         {
-        case MenuState.MainMenu:
-            QuitGame();
-            break;
-        case MenuState.LevelSelection:
-            levelSelectionUI.SetActive(false);
-            mainMenuUI.SetActive(true);
-            currentState = MenuState.MainMenu;
-            break;
-        case MenuState.Settings:
-            settingsUI.SetActive(false);
-            mainMenuUI.SetActive(true);
-            currentState = MenuState.MainMenu;
-            break;
-        case MenuState.Credits:
-            creditsUI.SetActive(false);
-            mainMenuUI.SetActive(true);
-            currentState = MenuState.MainMenu;
-            StopCoroutine(creditsCoroutine);
-            break;
+            case MenuState.MainMenu:
+                QuitGame();
+                break;
+            case MenuState.LevelSelection:
+                levelSelectionUI.SetActive(false);
+                mainMenuUI.SetActive(true);
+                currentState = MenuState.MainMenu;
+                break;
+            case MenuState.Settings:
+                settingsUI.SetActive(false);
+                mainMenuUI.SetActive(true);
+                currentState = MenuState.MainMenu;
+                break;
+            case MenuState.Credits:
+                creditsUI.SetActive(false);
+                mainMenuUI.SetActive(true);
+                currentState = MenuState.MainMenu;
+                StopCoroutine(creditsCoroutine);
+                break;
         }
     }
 }
