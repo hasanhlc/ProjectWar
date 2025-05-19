@@ -1,4 +1,6 @@
 using System.Collections;
+using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -38,6 +40,19 @@ public class UIManager : MonoBehaviour
     public Sprite SettingsWar;
     public Sprite SettingsPeace;
 
+    [Header("Button Parentları")]
+
+    public GameObject MainMenuButtons;
+
+    [Header("Button Görselleri")]
+
+    public Sprite WarButtonSprite;
+    public Sprite PeaceButtonSprite;
+
+    public RectTransform LevelSelectButtonsParent;
+    public GameObject LevelSelectionHeader;
+
+
 
 
     private bool isWar;
@@ -63,6 +78,45 @@ public class UIManager : MonoBehaviour
         else
         {
             isWar = false;
+        }
+
+        ChangeButtonSprites();
+        SetLevelSelectionHeader();
+    }
+
+    public void ChangeButtonSprites()
+    {
+        if (isWar)
+        {
+            foreach (Transform button in MainMenuButtons.transform)
+            {
+                button.gameObject.GetComponent<Image>().sprite = WarButtonSprite;
+            }
+        }
+        else
+        {
+            foreach (Transform button in MainMenuButtons.transform)
+            {
+                button.gameObject.GetComponent<Image>().sprite = PeaceButtonSprite;
+            }
+        }
+    }
+
+    public void SetLevelSelectionHeader()
+    {
+        if (isWar)
+        {
+            LevelSelectionHeader.GetComponent<TextMeshProUGUI>().fontSize = 65f;
+            LevelSelectionHeader.GetComponent<TextMeshProUGUI>().color = new Color(0f, 173f, 0f);
+            LevelSelectionHeader.GetComponent<RectTransform>().anchoredPosition = new Vector2(-154f ,256f);
+
+
+        }
+        else // peace
+        {
+            LevelSelectionHeader.GetComponent<TextMeshProUGUI>().fontSize = 85.3f;
+            LevelSelectionHeader.GetComponent<TextMeshProUGUI>().color = new Color(255f, 255f, 255);
+            LevelSelectionHeader.GetComponent<RectTransform>().anchoredPosition = new Vector2(-338f ,348f);
         }
     }
     private void Start()
@@ -150,10 +204,12 @@ public class UIManager : MonoBehaviour
         if (isWar)
         {
             LevelSelectBackground.GetComponent<Image>().sprite = LevelSelectWar;
+            LevelSelectButtonsParent.anchoredPosition = new Vector2(0f ,-40f);
         }
         else
         {
             LevelSelectBackground.GetComponent<Image>().sprite = LevelSelectPeace;
+            LevelSelectButtonsParent.anchoredPosition = new Vector2(0f, -118f);
         }
 
     }

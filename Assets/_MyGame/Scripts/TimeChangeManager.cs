@@ -236,8 +236,8 @@ public class TimeChangeManager : MonoBehaviour
     private IEnumerator RopeProgressDecrase()
     {
         float elapsedTime = 0f;
-        float startRotationZ = 0f;
-        float endRotationZ = 180f;
+        float startRotationZ = -89f;
+        float endRotationZ = 0f;
         while (elapsedTime < rotationDuration)
         {
             elapsedTime += Time.deltaTime;
